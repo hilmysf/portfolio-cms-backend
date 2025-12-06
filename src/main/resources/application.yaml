@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/portfolio_cms
+    username: cms_user
+    password: cms_user
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true  # run data.sql AFTER Hibernate
+
+  sql:
+    init:
+      mode: always   # ensure data.sql is executed
+
+cloudflare:
+  r2:
+    account-id: af4355b9b2bda7a8463eaba33c350c14
+    access-key: 0372c68d0b489948c784d602c4e7acf1
+    secret-key: 0975e7d318f25236f593e6b73b499b5f7905e6f91abc18ad5e250013771c5cf3
+    bucket-name: portfolio-media
+    public-url: https://pub-67f6276b2fc94a12b131fb4be4db8ba8.r2.dev
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE # Ini akan menampilkan parameter (UUID, Title, Slug) yang dikirim
+server:
+  port: 8080
