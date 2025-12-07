@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -39,6 +40,8 @@ public class TechStack {
     private String titleSlug;
     @Column(name = "image_url", length = 255, nullable = false)
     private String imageUrl;
+    @ManyToMany(mappedBy = "techStacks")
+    private List<Project> projects;
 
     @PrePersist
     @PreUpdate

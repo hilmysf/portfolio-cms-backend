@@ -59,6 +59,14 @@ public class Project {
     @Column(name = "title_slug", nullable = false, unique = true)
     private String titleSlug;
 
+    @ManyToMany
+    @JoinTable(
+            name = "project_tech_stack",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "tech_stack_id")
+    )
+    private List<TechStack> techStacks;
+
     @PrePersist
     @PreUpdate
     private void generateSlug() {
